@@ -1,95 +1,81 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { PRODUCTS } from "@/constants/products";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Link from "next/link";
+import { getRandomText } from "./utils";
+import { WithCenterLayout } from "@/components/hoc";
+import { ImageItem } from "@/interfaces";
+
+const ImageCard = ({ src, category }: { src: string; category: string }) => (
+  <Card
+    sx={{
+      width: 345,
+      margin: "10px",
+      display: "flex",
+      flexDirection: "column",
+      cursor: "pointer",
+      transition: "transform 0.3s",
+      "&:hover": {
+        transform: "scale(1.05)",
+      },
+    }}
+  >
+    <Link href={`/${category}`}>
+      <CardMedia component="img" height="140" image={src} alt="Product Image" />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary" mb={4}>
+          {getRandomText(1)}
+        </Typography>
+        <WithCenterLayout
+          width="100%"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Typography variant="h6" color="text.primary">
+            11.5$
+          </Typography>
+
+          <Button size="small" variant="contained" color="primary">
+            Add to Cart
+          </Button>
+        </WithCenterLayout>
+      </CardContent>
+    </Link>
+    <CardActions></CardActions>
+  </Card>
+);
+
+const CardsPage = async () => {
+  return (
+    <Box
+      display="flex"
+      flexDirection="row"
+      flexWrap="wrap"
+      gap={2} // 20px gap
+      justifyContent="center"
+      padding={2}
+      my={5}
+    >
+      {PRODUCTS.map((item: ImageItem, index) => (
+        <ImageCard key={index} src={item.src} category={item.category} />
+      ))}
+    </Box>
+  );
+};
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+    <main>
+      <CardsPage />
     </main>
   );
 }
