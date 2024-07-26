@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import { Footer, NavBar } from "@/components/layout";
+import { Footer, NavBar, PortalMenu } from "@/components/layout";
 import { CssBaseline } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
 import { Suspense } from "react";
 import Loading from "./loading";
+import theme from "./theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,8 +29,9 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <NavBar />
-            <Suspense fallback={<Loading />}> {children}</Suspense>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
             <Footer />
+            <PortalMenu />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

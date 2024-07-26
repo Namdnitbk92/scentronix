@@ -2,7 +2,6 @@
 import { red } from "@mui/material/colors";
 import { ThemeOptions, createTheme } from "@mui/material/styles";
 import { Roboto } from "next/font/google";
-import { Typography } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

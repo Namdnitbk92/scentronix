@@ -1,5 +1,5 @@
 import { SxProps, Theme } from "@mui/material/styles";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 export interface MenuItem {
   title: string;
@@ -29,4 +29,12 @@ export interface IconButtonProps {
   buttonStyle?: SxProps<Theme>;
   icon: React.ReactNode | FC<{}>;
   variant?: "contained" | "outlined" | "text"; // Added variant prop
+}
+
+export interface IMenu {
+  title: string;
+  description?: string;
+  optional?: string;
+  price: number | string;
+  icon: ReactNode;
 }

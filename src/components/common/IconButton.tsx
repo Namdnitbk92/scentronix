@@ -1,6 +1,7 @@
-import React, { FC } from "react";
-import Button from "@mui/material/Button";
 import { IconButtonProps } from "@/interfaces";
+import { IconButtonProps as MUIIconButtonProps } from "@mui/material";
+import Button from "@mui/material/Button";
+import React from "react";
 
 /**
 + * Renders an IconButton component.
@@ -14,22 +15,24 @@ import { IconButtonProps } from "@/interfaces";
 + * @param {string} props.variant - The variant of the button.
 + * @return {JSX.Element} The rendered IconButton component.
 + */
-const IconButton: React.FC<IconButtonProps> = ({
+const IconButton: React.FC<IconButtonProps & MUIIconButtonProps> = ({
   onClick,
   children,
   icon,
   iconColor = "inherit",
   buttonStyle,
-  variant,
+  variant = "outlined",
+  ...rest
 }) => {
   return (
     <Button
+      variant={variant}
       onClick={onClick}
       startIcon={React.cloneElement(icon as React.ReactElement, {
         style: { color: iconColor },
       })}
       sx={buttonStyle}
-      variant={variant}
+      {...rest}
     >
       {children}
     </Button>
